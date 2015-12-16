@@ -6,6 +6,7 @@ spec mac0 =
    event e1
      grd iamaguard1 x in NAT
      act iamanaction1 x = x + 1
+end
 
 spec mac1 =
    event e2

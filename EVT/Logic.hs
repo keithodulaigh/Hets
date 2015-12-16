@@ -8,6 +8,12 @@ module EVT.Logic where
 
 import Common.DocUtils
 import Common.Id
+import Common.ExtSign
+import Common.AS_Annotation
+import Common.ExtSign
+import Common.GlobalAnnotations
+import Common.Id
+import Common.Result
 
 import Data.Monoid
 
@@ -122,8 +128,18 @@ instance StaticAnalysis EVT
     EVTSymbol                      -- symbol
     EVTRawSymbol                   -- raw_symbol
     where
-      --basic_analysis EVT = Just basic_analysis
+      basic_analysis EVT = Just evt_basic_analysis
       empty_signature EVT = emptyEVTSign 
       --is_subsig EVT = isEVTSubsig
      -- subsig_inclusion EVT = evtInclusion
      -- signature_union EVT = uniteSig-}
+
+evt_basic_analysis :: (MACHINE, EVTSign, GlobalAnnos) -> Result (MACHINE, ExtSign EVTSign EVTSymbol, [Named Sentence])
+evt_basic_analysis (spec, sign, _) =
+    do
+        return (spec, ExtSign
+                    {
+                        plainSign = undefined
+                    , nonImportedSymbols = undefined
+                    },
+                    [])
